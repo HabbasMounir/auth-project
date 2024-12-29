@@ -10,7 +10,7 @@ import { UserModule } from '../user/user.module';
     secret: 'your_secret_key', // Replace with your secret key
     signOptions: { expiresIn: '60m' }, // Adjust expiration as needed
   }),
-  forwardRef(() => UserModule), // Import UserModule if AuthService depends on it
+  UserModule, // Import UserModule if AuthService depends on it
 ],
 
   providers: [AuthService],
