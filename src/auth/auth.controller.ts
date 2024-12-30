@@ -23,14 +23,9 @@ export class AuthController {
     res.cookie('session_id', req.sessionID, { httpOnly: true, secure: true });
     return res.send({ message: 'Login successful', access_token });
   }
-
+  @UseGuards(JwtAuthGuard) 
   @Get('profile')
-  @UseGuards(JwtAuthGuard) // Protect the route
   async getProfile(@Req() req: Request) {
-    const uuid = req.user?.uuid; // Now TypeScript recognizes req.user
-    if (!uuid) {
-      throw new Error('User  not found'); // Handle the case where user is not found
-    }
-    return this.authService.getProfile(uuid); // Pass uuid as a string
+    return req.user; 
   }
 }
