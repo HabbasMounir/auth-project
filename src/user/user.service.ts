@@ -36,7 +36,12 @@ export class UserService {
     return user;
   }
 
-  findByUsername(email: string): Promise<User> {
+  // Method to find a user by UUID
+  async findById(uuid: string): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { uuid } }); // Ensure the property name matches the entity
+  }
+
+  findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email } });
   }
 }
